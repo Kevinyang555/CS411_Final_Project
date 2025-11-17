@@ -1,0 +1,501 @@
+name,country,lat,lon,tz
+Tokyo,Japan,35.687,139.7495,UTC
+Jakarta,Indonesia,-6.175,106.8275,UTC
+Delhi,India,28.61,77.23,UTC
+Guangzhou,China,23.13,113.26,UTC
+Mumbai,India,19.0761,72.8775,UTC
+Manila,Philippines,14.5958,120.9772,UTC
+Shanghai,China,31.2286,121.4747,UTC
+São Paulo,Brazil,-23.5504,-46.6339,UTC
+Seoul,"Korea, South",37.5667,126.9833,UTC
+Mexico City,Mexico,19.4333,-99.1333,UTC
+Kolkāta,India,22.5675,88.37,UTC
+Cairo,Egypt,30.0444,31.2358,UTC
+Karachi,Pakistan,24.86,67.01,UTC
+Dhaka,Bangladesh,23.7289,90.3944,UTC
+New York,United States,40.6943,-73.9249,UTC
+Beijing,China,39.9067,116.3975,UTC
+Bangkok,Thailand,13.7525,100.4942,UTC
+Shenzhen,China,22.5415,114.0596,UTC
+Moscow,Russia,55.7506,37.6175,UTC
+Buenos Aires,Argentina,-34.6036,-58.3814,UTC
+Lagos,Nigeria,6.455,3.3841,UTC
+Bangalore,India,12.9789,77.5917,UTC
+Ho Chi Minh City,Vietnam,10.7756,106.7019,UTC
+Ōsaka,Japan,34.6939,135.5022,UTC
+Chengdu,China,30.66,104.0633,UTC
+Istanbul,Turkey,41.0136,28.955,UTC
+Tehran,Iran,35.6889,51.3897,UTC
+Kinshasa,Congo (Kinshasa),-4.3219,15.3119,UTC
+Rio de Janeiro,Brazil,-22.9111,-43.2056,UTC
+Chennai,India,13.0825,80.275,UTC
+Xi’an,China,34.2611,108.9422,UTC
+Lahore,Pakistan,31.5497,74.3436,UTC
+Chongqing,China,29.5637,106.5504,UTC
+Los Angeles,United States,34.1141,-118.4068,UTC
+London,United Kingdom,51.5072,-0.1275,UTC
+Paris,France,48.8567,2.3522,UTC
+Linyi,China,35.1038,118.3564,UTC
+Dongguan,China,23.021,113.752,UTC
+Baoding,China,38.874,115.464,UTC
+Hyderābād,India,17.3617,78.4747,UTC
+Tianjin,China,39.1336,117.2054,UTC
+Lima,Peru,-12.06,-77.0375,UTC
+Wuhan,China,30.5934,114.3046,UTC
+Nanyang,China,32.9902,112.5285,UTC
+Hangzhou,China,30.267,120.153,UTC
+Nagoya,Japan,35.1833,136.9,UTC
+Luanda,Angola,-8.8383,13.2344,UTC
+Foshan,China,23.0214,113.1216,UTC
+Kuala Lumpur,Malaysia,3.1686,101.698,UTC
+Zhoukou,China,33.6367,114.7014,UTC
+Tongshan,China,34.261,117.1859,UTC
+Hanoi,Vietnam,21.0,105.85,UTC
+Chicago,United States,41.8375,-87.6866,UTC
+Nanjing,China,32.0608,118.7789,UTC
+Heze,China,35.2343,115.4796,UTC
+Pune,India,18.5203,73.8567,UTC
+Jining,China,35.4151,116.5871,UTC
+Bogotá,Colombia,4.7111,-74.0722,UTC
+Ahmedabad,India,23.0225,72.5714,UTC
+Shenyang,China,41.8025,123.4281,UTC
+Dar es Salaam,Tanzania,-6.8161,39.2803,UTC
+Khartoum,Sudan,15.6031,32.5265,UTC
+Johannesburg,South Africa,-26.2044,28.0456,UTC
+Fuyang,China,32.89,115.814,UTC
+Hong Kong,Hong Kong,22.3,114.2,UTC
+Ganzhou,China,25.831,114.933,UTC
+Shangqiu,China,34.415,115.656,UTC
+Cangzhou,China,38.3047,116.8387,UTC
+Riyadh,Saudi Arabia,24.65,46.71,UTC
+Santiago,Chile,-33.4372,-70.6506,UTC
+Zhumadian,China,33.014,114.022,UTC
+Zhanjiang,China,21.2701,110.3575,UTC
+Rangoon,Burma,16.795,96.16,UTC
+Yancheng,China,33.35,120.1569,UTC
+Bijie,China,27.284,105.292,UTC
+Xingtai,China,37.0717,114.5048,UTC
+Hengyang,China,26.894,112.572,UTC
+Shaoyang,China,27.2395,111.4679,UTC
+Surabaya,Indonesia,-7.2458,112.7378,UTC
+Sūrat,India,21.205,72.84,UTC
+Quanzhou,China,24.8744,118.6757,UTC
+Shangrao,China,28.4551,117.9431,UTC
+Zunyi,China,27.722,107.031,UTC
+Madrid,Spain,40.4169,-3.7033,UTC
+Baghdad,Iraq,33.3153,44.3661,UTC
+Maoming,China,21.6627,110.9255,UTC
+Miami,United States,25.784,-80.2101,UTC
+Xinyang,China,32.149,114.091,UTC
+Houston,United States,29.786,-95.3885,UTC
+Singapore,Singapore,1.3,103.8,UTC
+Prayagraj,India,25.4358,81.8464,UTC
+Huanggang,China,30.4537,114.8724,UTC
+Dalian,China,38.9,121.6,UTC
+Ankara,Turkey,39.93,32.85,UTC
+Dallas,United States,32.7935,-96.7667,UTC
+Qingdao,China,36.0669,120.3827,UTC
+Yulin,China,22.654,110.181,UTC
+Liaocheng,China,36.4559,115.9852,UTC
+Douala,Cameroon,4.05,9.7,UTC
+Qujing,China,25.491,103.796,UTC
+Nangandao,China,35.3036,113.9268,UTC
+Addis Ababa,Ethiopia,9.03,38.74,UTC
+Philadelphia,United States,40.0077,-75.1339,UTC
+Toronto,Canada,43.7417,-79.3733,UTC
+Zhengzhou,China,34.764,113.684,UTC
+Nanchong,China,30.8372,106.1106,UTC
+Jinan,China,36.6702,117.0207,UTC
+Giza,Egypt,29.987,31.2118,UTC
+Saint Petersburg,Russia,59.9375,30.3086,UTC
+Jieyang,China,23.551,116.3727,UTC
+Dezhou,China,37.436,116.359,UTC
+Nairobi,Kenya,-1.2864,36.8172,UTC
+Guadalajara,Mexico,20.6767,-103.3475,UTC
+Tai’an,China,36.202,117.087,UTC
+Dazhou,China,31.2093,107.4678,UTC
+Belo Horizonte,Brazil,-19.9281,-43.9419,UTC
+Suzhou,China,33.648,116.964,UTC
+Monterrey,Mexico,25.6844,-100.3181,UTC
+Yongzhou,China,26.42,111.613,UTC
+Changde,China,29.031,111.699,UTC
+Xiangyang,China,32.01,112.122,UTC
+Atlanta,United States,33.7628,-84.422,UTC
+Pudong,China,31.2347,121.5064,UTC
+Washington,United States,38.9047,-77.0163,UTC
+Zhaotong,China,27.338,103.717,UTC
+Zhangzhou,China,24.513,117.647,UTC
+Yueyang,China,29.3647,113.1309,UTC
+Melbourne,Australia,-37.8142,144.9631,UTC
+Yichun,China,27.816,114.417,UTC
+Abidjan,Côte d’Ivoire,5.3364,-4.0267,UTC
+Guilin,China,25.275,110.296,UTC
+Pingdingshan,China,33.7666,113.1926,UTC
+Alexandria,Egypt,31.1975,29.8925,UTC
+Bozhou,China,33.8463,115.7786,UTC
+Sydney,Australia,-33.8667,151.2,UTC
+Barcelona,Spain,41.3833,2.1833,UTC
+Yuncheng,China,35.0267,111.007,UTC
+Cape Town,South Africa,-33.9253,18.4239,UTC
+Changsha,China,28.228,112.939,UTC
+Suqian,China,33.963,118.275,UTC
+Jeddah,Saudi Arabia,21.5428,39.1728,UTC
+Weinan,China,34.5206,109.471,UTC
+Berlin,Germany,52.52,13.405,UTC
+Chenzhou,China,25.77,113.016,UTC
+Jiangmen,China,22.5789,113.0815,UTC
+Mianyang,China,31.468,104.679,UTC
+Jiujiang,China,29.661,115.954,UTC
+Huaihua,China,27.5698,110.0016,UTC
+Huanglongsi,China,34.795,114.345,UTC
+Taizhou,China,32.4567,119.9229,UTC
+Belāhi,India,26.4,86.25,UTC
+Yibin,China,28.752,104.643,UTC
+Ji’an,China,27.0912,114.9668,UTC
+Yangzhou,China,32.3944,119.4128,UTC
+Kunming,China,25.0464,102.7094,UTC
+Changchun,China,43.897,125.326,UTC
+Lu’an,China,31.736,116.52,UTC
+Xinpu,China,34.5966,119.2214,UTC
+Langfang,China,39.5383,116.6835,UTC
+Boston,United States,42.3188,-71.0852,UTC
+Ürümqi,China,43.8225,87.6125,UTC
+Suzhou,China,31.3,120.6194,UTC
+Guigang,China,23.112,109.599,UTC
+Shantou,China,23.354,116.682,UTC
+Jiangguanchi,China,34.037,113.852,UTC
+Kabul,Afghanistan,34.5253,69.1783,UTC
+Xiaoganzhan,China,30.918,113.957,UTC
+Bamako,Mali,12.6458,-7.9922,UTC
+Kano,Nigeria,12.0,8.5167,UTC
+Luzhou,China,28.871,105.442,UTC
+Hefei,China,31.8206,117.2273,UTC
+Hengshui,China,37.739,115.669,UTC
+Fortaleza,Brazil,-3.7275,-38.5275,UTC
+Anqing,China,30.5318,117.1153,UTC
+Zhangjiakou,China,40.769,114.886,UTC
+Zhaoqing,China,23.05,112.4667,UTC
+Shijiazhuang,China,38.0425,114.51,UTC
+Ningbo,China,29.8603,121.6245,UTC
+Qiqihar,China,47.3549,123.9182,UTC
+Phoenix,United States,33.5722,-112.0892,UTC
+Liuzhou,China,24.3278,109.4278,UTC
+Chifeng,China,42.255,118.8825,UTC
+Xiaoxita,China,30.692,111.287,UTC
+Amman,Jordan,31.9497,35.9328,UTC
+Linfen,China,36.088,111.519,UTC
+Xianyang,China,34.3299,108.7088,UTC
+Chuzhou,China,32.256,118.333,UTC
+Kumasi,Ghana,6.7,-1.625,UTC
+Zhuzhou,China,27.829,113.133,UTC
+Taiyuan,China,37.8704,112.5497,UTC
+Qingyuan,China,23.682,113.056,UTC
+Meizhou,China,24.289,116.122,UTC
+Yiyang,China,28.5549,112.356,UTC
+Nanning,China,22.8167,108.3275,UTC
+Harbin,China,45.7576,126.6409,UTC
+Loudi,China,27.6998,111.9944,UTC
+Abuja,Nigeria,9.0667,7.4833,UTC
+Yokohama,Japan,35.4442,139.6381,UTC
+Suihua,China,46.654,126.969,UTC
+Binzhou,China,37.383,117.971,UTC
+Zaozhuang,China,34.8109,117.3238,UTC
+Detroit,United States,42.3834,-83.1024,UTC
+Xiamen,China,24.4796,118.0889,UTC
+Mashhad,Iran,36.3264,59.5433,UTC
+Montréal,Canada,45.5089,-73.5617,UTC
+Fuzhou,China,26.0743,119.2964,UTC
+Wuhu,China,31.3526,118.4331,UTC
+Medan,Indonesia,3.5894,98.6739,UTC
+Yulinshi,China,38.2858,109.7341,UTC
+Fuzhou,China,27.949,116.358,UTC
+Wenzhou,China,27.9938,120.6993,UTC
+Changzhou,China,31.811,119.974,UTC
+Puyang,China,35.7627,115.0292,UTC
+Nanchang,China,28.683,115.858,UTC
+Baicheng,China,23.903,106.619,UTC
+Seattle,United States,47.6211,-122.3244,UTC
+Ibadan,Nigeria,7.3964,3.9167,UTC
+Jiaozuo,China,35.2157,113.2419,UTC
+Nādampālaiyam,India,11.0125,76.9714,UTC
+Deyang,China,31.127,104.398,UTC
+Busan,"Korea, South",35.18,129.075,UTC
+Hechi,China,24.693,108.085,UTC
+Tangshan,China,39.6294,118.1739,UTC
+Lucknow,India,26.85,80.95,UTC
+San Francisco,United States,37.7558,-122.4449,UTC
+Boankra,Ghana,6.6919,-1.4051,UTC
+Dubai,United Arab Emirates,25.2631,55.2972,UTC
+Anshan,China,41.108,122.994,UTC
+Guozhen,China,34.3609,107.1751,UTC
+Baojishi,China,34.363,107.238,UTC
+Qinzhou,China,21.981,108.654,UTC
+Guiyang,China,26.647,106.63,UTC
+Wuxi,China,31.5667,120.2833,UTC
+Kannankulam,India,10.52,76.21,UTC
+Caracas,Venezuela,10.4806,-66.9036,UTC
+Kotla Qasim Khan,Pakistan,32.5833,73.75,UTC
+Casablanca,Morocco,33.5333,-7.5833,UTC
+Hanzhong,China,33.0664,107.0232,UTC
+Shiyan,China,32.629,110.7987,UTC
+Guang’an,China,30.4564,106.6326,UTC
+Faisalabad,Pakistan,31.4167,73.0911,UTC
+Changzhi,China,36.195,113.117,UTC
+Tongren,China,27.7316,109.1895,UTC
+Bengbu,China,32.917,117.389,UTC
+Leshan,China,29.552,103.766,UTC
+Santa Cruz de la Sierra,Bolivia,-17.7892,-63.1975,UTC
+Neijiang,China,29.5802,105.058,UTC
+Zhenjiang,China,32.188,119.424,UTC
+Qinhuangdao,China,39.8882,119.5202,UTC
+Bursa,Turkey,40.1833,29.05,UTC
+Tashkent,Uzbekistan,41.3111,69.2797,UTC
+Guayaquil,Ecuador,-2.19,-79.8875,UTC
+Jaipur,India,26.9,75.8,UTC
+Lanzhou,China,36.0606,103.8268,UTC
+Ouagadougou,Burkina Faso,12.3686,-1.5275,UTC
+Athens,Greece,37.9842,23.7281,UTC
+San Diego,United States,32.8313,-117.1222,UTC
+Guatemala City,Guatemala,14.6417,-90.5133,UTC
+Kuwait City,Kuwait,29.3697,47.9783,UTC
+Qincheng,China,34.5815,105.7248,UTC
+İzmir,Turkey,38.42,27.14,UTC
+Quezon City,Philippines,14.65,121.0475,UTC
+Kyiv,Ukraine,50.45,30.5233,UTC
+Kottārasshēri,India,10.775,76.651,UTC
+Meishan,China,30.0771,103.8484,UTC
+Incheon,"Korea, South",37.4833,126.6333,UTC
+Ningde,China,26.6662,119.5477,UTC
+Zhongshan,China,22.517,113.3925,UTC
+Minneapolis,United States,44.9635,-93.2678,UTC
+Tampa,United States,27.9945,-82.4447,UTC
+Putian,China,25.4526,119.0078,UTC
+Mbuji-Mayi,Congo (Kinshasa),-6.15,23.6,UTC
+Tongliao,China,43.654,122.243,UTC
+Chaoyang,China,41.571,120.453,UTC
+Hohhot,China,40.842,111.749,UTC
+Pyongyang,"Korea, North",39.0167,125.7475,UTC
+Shaoguan,China,24.811,113.597,UTC
+Taichung,Taiwan,24.1439,120.6794,UTC
+Cali,Colombia,3.4206,-76.5222,UTC
+Heyuan,China,23.7443,114.7002,UTC
+Wuzhou,China,23.4767,111.279,UTC
+Pretoria,South Africa,-25.7461,28.1881,UTC
+Suining,China,30.533,105.593,UTC
+Omdurman,Sudan,15.6835,32.4629,UTC
+Weihai,China,37.5133,122.1205,UTC
+Rizhao,China,35.417,119.527,UTC
+Malang,Indonesia,-7.98,112.62,UTC
+Stuttgart,Germany,48.7775,9.18,UTC
+Daqing,China,46.589,125.104,UTC
+Rome,Italy,41.8931,12.4828,UTC
+Kaohsiung,Taiwan,22.615,120.2975,UTC
+Brooklyn,United States,40.6501,-73.9496,UTC
+Xiangtan,China,27.8313,112.9454,UTC
+Bazhou,China,31.868,106.748,UTC
+Handan,China,36.601,114.487,UTC
+Brisbane,Australia,-27.4678,153.0281,UTC
+Jinzhou,China,41.129,121.148,UTC
+Denver,United States,39.762,-104.8758,UTC
+Xinzhou,China,38.416,112.734,UTC
+Nanping,China,26.6418,118.1774,UTC
+Gāzipura,Bangladesh,23.9234,90.3959,UTC
+Shanwei,China,22.7872,115.3756,UTC
+Maracaibo,Venezuela,10.6333,-71.6333,UTC
+Chaozhou,China,23.658,116.622,UTC
+Baotou,China,40.6213,109.9532,UTC
+Longyan,China,25.076,117.017,UTC
+Weifang,China,36.708,119.162,UTC
+Huai’an,China,33.551,119.113,UTC
+Zibo,China,36.8138,118.055,UTC
+Attadappa,India,11.8689,75.3555,UTC
+Munich,Germany,48.1375,11.575,UTC
+Gulou,China,26.0865,119.298,UTC
+Birmingham,United Kingdom,52.48,-1.9025,UTC
+Valencia,Venezuela,10.1833,-68.0,UTC
+Damascus,Syria,33.502,36.2981,UTC
+Chattogram,Bangladesh,22.335,91.8325,UTC
+Brazzaville,Congo (Brazzaville),-4.2667,15.2667,UTC
+Yangjiang,China,21.857,111.983,UTC
+Sanaa,Yemen,15.3483,44.2064,UTC
+Barmhān Kalān,India,19.1972,72.9722,UTC
+Medellín,Colombia,6.2308,-75.5906,UTC
+Dingxi,China,35.608,104.592,UTC
+Shaoxing,China,30.0511,120.5833,UTC
+Yantai,China,37.4646,121.4478,UTC
+Huizhou,China,23.112,114.416,UTC
+Xuanzhou,China,30.939,118.759,UTC
+Mirzāpur,India,25.146,82.569,UTC
+Hamburg,Germany,53.55,10.0,UTC
+Taipei,Taiwan,25.0375,121.5625,UTC
+Ankang,China,32.6854,109.029,UTC
+Zigong,China,29.339,104.779,UTC
+Sanming,China,26.2634,117.6389,UTC
+Toluca,Mexico,19.2925,-99.6569,UTC
+Huangshi,China,30.2011,115.039,UTC
+Yaoundé,Cameroon,3.8667,11.5167,UTC
+Zhuhai,China,22.2742,113.5719,UTC
+Huludao,China,40.711,120.837,UTC
+Baoshan,China,25.112,99.161,UTC
+Mecca,Saudi Arabia,21.4225,39.8261,UTC
+Vancouver,Canada,49.25,-123.1,UTC
+Lianshan,China,40.7523,120.828,UTC
+Beirut,Lebanon,33.8981,35.5058,UTC
+Salvador,Brazil,-12.9831,-38.4928,UTC
+Bucharest,Romania,44.4325,26.1039,UTC
+Longba,China,33.3702,104.9603,UTC
+Nāgpur,India,21.1497,79.0806,UTC
+Queens,United States,40.7498,-73.7976,UTC
+Tieling,China,42.2237,123.726,UTC
+Yunfu,China,22.9152,112.0445,UTC
+Bekasi,Indonesia,-6.2333,107.0,UTC
+Daegu,"Korea, South",35.8717,128.6017,UTC
+Ghāziābād,India,28.67,77.42,UTC
+Luoyang,China,34.6197,112.4539,UTC
+Luohe,China,33.5804,114.0166,UTC
+Algiers,Algeria,36.7325,3.0872,UTC
+Anshun,China,26.2531,105.9476,UTC
+Huainan,China,32.6314,117.0194,UTC
+Depok,Indonesia,-6.394,106.8225,UTC
+Konya,Turkey,37.8667,32.4833,UTC
+Haiphong,Vietnam,20.8651,106.6838,UTC
+Yanjiang,China,30.129,104.627,UTC
+Guangyuan,China,32.436,105.844,UTC
+Baku,Azerbaijan,40.3667,49.8352,UTC
+Yingkou,China,40.625,122.219,UTC
+Mudanjiang,China,44.5514,129.6329,UTC
+Riverside,United States,33.9381,-117.3949,UTC
+Fukuoka,Japan,33.59,130.4017,UTC
+Nantong,China,31.981,120.894,UTC
+Lincang,China,23.884,100.089,UTC
+Las Vegas,United States,36.2333,-115.2654,UTC
+Haikou,China,20.0186,110.3488,UTC
+Yuxi,China,24.347,102.527,UTC
+Tangerang,Indonesia,-6.1703,106.6403,UTC
+Supaul,India,26.126,86.605,UTC
+Almaty,Kazakhstan,43.24,76.915,UTC
+Vienna,Austria,48.2083,16.3725,UTC
+Eşfahān,Iran,32.6653,51.6703,UTC
+Xining,China,36.6224,101.7804,UTC
+Jincheng,China,35.491,112.852,UTC
+Baltimore,United States,39.3051,-76.6144,UTC
+Dandong,China,40.1167,124.3833,UTC
+Yan’an,China,36.65,109.494,UTC
+Qinbaling,China,35.7091,107.6436,UTC
+Gaoping,China,30.7824,106.1281,UTC
+Awka,Nigeria,6.2069,7.0678,UTC
+Taizhou,China,28.6557,121.4208,UTC
+Ma’anshan,China,31.669,118.507,UTC
+Jiamusi,China,46.8,130.319,UTC
+Perth,Australia,-31.9558,115.8597,UTC
+Gaziantep,Turkey,37.0628,37.3792,UTC
+Phnom Penh,Cambodia,11.5696,104.921,UTC
+St. Louis,United States,38.6359,-90.2451,UTC
+Mogadishu,Somalia,2.0392,45.3419,UTC
+Lishui,China,28.468,119.923,UTC
+Kowloon,Hong Kong,22.3167,114.1833,UTC
+Córdoba,Argentina,-31.4167,-64.1833,UTC
+Zamboanga City,Philippines,6.9042,122.0761,UTC
+Rawalpindi,Pakistan,33.6,73.0333,UTC
+Havana,Cuba,23.1367,-82.3589,UTC
+Chongzuo,China,22.377,107.365,UTC
+Portland,United States,45.5371,-122.65,UTC
+Laibin,China,23.7501,109.2212,UTC
+San Antonio,United States,29.4632,-98.5238,UTC
+Vadodara,India,22.3,73.2,UTC
+Qingyang,China,24.7816,118.5517,UTC
+Rājkot,India,22.3,70.7833,UTC
+Shangzhou,China,33.8734,109.9186,UTC
+Vishākhapatnam,India,17.7042,83.2978,UTC
+Shengli,China,37.434,118.6746,UTC
+Sanmenxia,China,34.7732,111.2004,UTC
+Warsaw,Poland,52.23,21.0111,UTC
+Gujranwala,Pakistan,32.1567,74.19,UTC
+Hezhou,China,24.4042,111.5672,UTC
+Aleppo,Syria,36.2319,37.1681,UTC
+Tijuana,Mexico,32.525,-117.0333,UTC
+Puning,China,23.298,116.166,UTC
+Indore,India,22.7167,75.8472,UTC
+Minsk,Belarus,53.9006,27.5586,UTC
+Karaj,Iran,35.8292,50.9675,UTC
+Kananga,Congo (Kinshasa),-5.897,22.4488,UTC
+Huaibei,China,33.956,116.798,UTC
+Peshawar,Pakistan,34.0144,71.5675,UTC
+Sacramento,United States,38.5677,-121.4685,UTC
+Sapporo,Japan,43.0619,141.3544,UTC
+Tilburg,Netherlands,51.5572,5.0911,UTC
+Austin,United States,30.3005,-97.7522,UTC
+Orlando,United States,28.4773,-81.337,UTC
+Davao,Philippines,7.07,125.6,UTC
+Songjiang,China,31.0058,121.2333,UTC
+Yinchuan,China,38.485,106.225,UTC
+Abhepur,India,39.41,116.38,UTC
+Thāne,India,19.1972,72.9722,UTC
+Multan,Pakistan,30.1978,71.4697,UTC
+Port Harcourt,Nigeria,4.8242,7.0336,UTC
+Fushun,China,41.881,123.957,UTC
+Tainan,Taiwan,22.9833,120.1833,UTC
+Pingliang,China,35.5424,106.6649,UTC
+Siping,China,43.1668,124.3506,UTC
+San Juan,Puerto Rico,18.3985,-66.061,UTC
+Pingxiang,China,27.659,113.887,UTC
+Bhopāl,India,23.2599,77.4126,UTC
+Mosul,Iraq,36.3667,43.1167,UTC
+Diyarbakır,Turkey,37.91,40.24,UTC
+Lubumbashi,Congo (Kinshasa),-11.6647,27.4794,UTC
+Benin City,Nigeria,6.3333,5.6222,UTC
+Curitiba,Brazil,-25.4297,-49.2719,UTC
+San Jose,United States,37.3012,-121.848,UTC
+Shuyangzha,China,34.1299,118.7734,UTC
+Adana,Turkey,37.0,35.3213,UTC
+Quito,Ecuador,-0.22,-78.5125,UTC
+Āgra,India,27.18,78.02,UTC
+Peyanvilai,India,8.9,77.9833,UTC
+Lusaka,Zambia,-15.4167,28.2833,UTC
+Indianapolis,United States,39.7771,-86.1458,UTC
+Hyderabad City,Pakistan,25.3792,68.3683,UTC
+Pimpri-Chinchwad,India,18.6186,73.8037,UTC
+Maracay,Venezuela,10.2469,-67.5961,UTC
+Masqaţ,Oman,23.614,58.5911,UTC
+Montevideo,Uruguay,-34.9056,-56.1842,UTC
+Pittsburgh,United States,40.4397,-79.9763,UTC
+Cincinnati,United States,39.1413,-84.506,UTC
+Manhattan,United States,40.7834,-73.9662,UTC
+Kansas City,United States,39.1238,-94.5541,UTC
+Budapest,Hungary,47.4983,19.0408,UTC
+Patna,India,25.594,85.1376,UTC
+Kampala,Uganda,0.3136,32.5811,UTC
+Beihai,China,21.481,109.12,UTC
+Sanzhou,China,30.82,108.4,UTC
+Cleveland,United States,41.4764,-81.6805,UTC
+Conakry,Guinea,9.5092,-13.7122,UTC
+Ximeicun,China,24.9612,118.3849,UTC
+Caloocan City,Philippines,14.65,120.97,UTC
+Ecatepec,Mexico,19.6097,-99.06,UTC
+Yushan,China,31.322,120.985,UTC
+Fuxin,China,42.022,121.67,UTC
+Novosibirsk,Russia,55.05,82.95,UTC
+Bilāspur,India,22.09,82.15,UTC
+Semarang,Indonesia,-6.99,110.4225,UTC
+Jingdezhen,China,29.2917,117.1986,UTC
+Ludhiāna,India,30.91,75.85,UTC
+Liaoyang,China,41.279,123.176,UTC
+Jiangyin,China,31.839,120.295,UTC
+Valencia,Spain,39.47,-0.3764,UTC
+Shuozhou,China,39.3317,112.4329,UTC
+León de los Aldama,Mexico,21.1167,-101.6833,UTC
+Columbus,United States,39.9862,-82.9855,UTC
+Puebla,Mexico,19.0333,-98.1833,UTC
+Biên Hòa,Vietnam,10.95,106.8167,UTC
+Chengtangcun,China,35.0833,117.15,UTC
+Yopougon,Côte d’Ivoire,5.3748,-4.0867,UTC
+Hebi,China,35.748,114.297,UTC
+Shīrāz,Iran,29.61,52.5425,UTC
+Dushanbe,Tajikistan,38.5367,68.78,UTC
+Madurai,India,9.9252,78.1198,UTC
+Huzhou,China,30.8925,120.0875,UTC
+Harare,Zimbabwe,-17.8292,31.0522,UTC
+Tabrīz,Iran,38.0817,46.2992,UTC
+Jamshedpur,India,22.7925,86.1842,UTC
+Baicheng,China,45.62,122.838,UTC
+San José,Costa Rica,9.9325,-84.08,UTC

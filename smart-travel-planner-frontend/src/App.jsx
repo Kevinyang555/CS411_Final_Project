@@ -8,6 +8,8 @@ function fToC(f) {
   return ((f - 32) * 5) / 9;
 }
 
+const API_BASE = "http://localhost:3000/api";
+
 // --------- Fake API fallback helpers (replace with real fetch calls later) ---------
 
 function mockTripSummary(payload) {
@@ -1268,13 +1270,25 @@ function Explore() {
   const [coldCities, setColdCities] = useState([]);
   const [cheapFlights, setCheapFlights] = useState([]);
   const [monthlyAvg, setMonthlyAvg] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState({
+    sunny: false,
+    cold: false,
+    cheap: false,
+    monthly: false,
+  });
+
+  async function fetchExplore(path, setter, key, fallback) {
+    setLoading((prev) => ({ ...prev, [key]: true }));
+    const data = await safeFetchJSON(`${API_BASE}${path}`, {}, fallback);
+    setter(data || []);
+    setLoading((prev) => ({ ...prev, [key]: false }));
+  }
 
   async function loadSunnyCities() {
-    setLoading(true);
-    const data = await safeFetchJSON(
-      "/api/explore/sunny-cities",
-      {},
+    await fetchExplore(
+      "/explore/sunny-cities?limit=10",
+      setSunnyCities,
+      "sunny",
       [
         {
           city: "Lisbon",
@@ -1285,15 +1299,13 @@ function Explore() {
         },
       ]
     );
-    setSunnyCities(data);
-    setLoading(false);
   }
 
   async function loadColdCities() {
-    setLoading(true);
-    const data = await safeFetchJSON(
-      "/api/explore/cold-cities",
-      {},
+    await fetchExplore(
+      "/explore/cold-cities?minDelta=2&limit=10",
+      setColdCities,
+      "cold",
       [
         {
           city: "Denver",
@@ -1303,15 +1315,13 @@ function Explore() {
         },
       ]
     );
-    setColdCities(data);
-    setLoading(false);
   }
 
   async function loadCheapFlights() {
-    setLoading(true);
-    const data = await safeFetchJSON(
-      "/api/explore/cheap-flights-good-weather",
-      {},
+    await fetchExplore(
+      "/explore/cheap-flights-good-weather?minTemp=15&maxTemp=28&maxPrecip=3&maxPrice=1000&limit=15",
+      setCheapFlights,
+      "cheap",
       [
         {
           flight_id: 1,
@@ -1325,15 +1335,13 @@ function Explore() {
         },
       ]
     );
-    setCheapFlights(data);
-    setLoading(false);
   }
 
   async function loadMonthlyAvg() {
-    setLoading(true);
-    const data = await safeFetchJSON(
-      "/api/explore/monthly-route-avg",
-      {},
+    await fetchExplore(
+      "/explore/monthly-route-avg?limit=20",
+      setMonthlyAvg,
+      "monthly",
       [
         {
           origin_city: "Chicago",
@@ -1343,8 +1351,6 @@ function Explore() {
         },
       ]
     );
-    setMonthlyAvg(data);
-    setLoading(false);
   }
 
   return (
@@ -1362,7 +1368,7 @@ function Explore() {
             title="Sunniest cities this week"
             description="Top cities with many clear days and low precipitation."
             actionLabel="Load sunny cities"
-            loading={loading}
+            loading={loading.sunny}
             onAction={loadSunnyCities}
           >
             {sunnyCities.length > 0 && (
@@ -1395,7 +1401,7 @@ function Explore() {
             title="Colder cities than country average"
             description="Find local ski / cold-weather destinations."
             actionLabel="Load colder cities"
-            loading={loading}
+            loading={loading.cold}
             onAction={loadColdCities}
           >
             {coldCities.length > 0 && (
@@ -1426,7 +1432,7 @@ function Explore() {
             title="Cheapest flights to good-weather places"
             description="Pair flight prices with pleasant temperature ranges."
             actionLabel="Load cheap flights"
-            loading={loading}
+            loading={loading.cheap}
             onAction={loadCheapFlights}
           >
             {cheapFlights.length > 0 && (
@@ -1463,7 +1469,7 @@ function Explore() {
             title="Monthly route price trends"
             description="Average price by month for each origin/destination."
             actionLabel="Load monthly averages"
-            loading={loading}
+            loading={loading.monthly}
             onAction={loadMonthlyAvg}
           >
             {monthlyAvg.length > 0 && (

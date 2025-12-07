@@ -10,6 +10,12 @@ import {
     removeItineraryItem,
     deleteTrip
 } from '../controllers/tripItineraryController.js';
+import {
+    getSunniestCities,
+    getColderCities,
+    getCheapFlightsGoodWeather,
+    getMonthlyRouteAvg
+} from '../controllers/exploreController.js';
 
 const router = express.Router();
 
@@ -29,5 +35,11 @@ router.delete('/trips/:tripId', deleteTrip);
 router.post('/trips/:tripId/itinerary', addItineraryItem);
 router.put('/trips/:tripId/itinerary/:itemId', updateItineraryItem);
 router.delete('/trips/:tripId/itinerary/:itemId', removeItineraryItem);
+
+// Explore Destinations
+router.get('/explore/sunny-cities', getSunniestCities);
+router.get('/explore/cold-cities', getColderCities);
+router.get('/explore/cheap-flights-good-weather', getCheapFlightsGoodWeather);
+router.get('/explore/monthly-route-avg', getMonthlyRouteAvg);
 
 export default router;

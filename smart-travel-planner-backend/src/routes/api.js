@@ -9,7 +9,7 @@
 
 import express from 'express';
 import { getTripSummary } from '../controllers/tripController.js';
-
+import { userLogin } from '../controllers/userController.js'
 const router = express.Router();
 
 // ==================== TRIP PLANNING ENDPOINTS ====================
@@ -32,6 +32,11 @@ const router = express.Router();
  * - Attractions with crowd data
  * - Best time to visit recommendation
  */
+
+// For login 
+
+router.post('/userLogin', userLogin);
+
 router.post('/trip-summary', getTripSummary);
 
 // ==================== EXPLORE ENDPOINTS ====================
@@ -40,5 +45,6 @@ router.post('/trip-summary', getTripSummary);
 // router.get('/explore/cold-cities', getColdCities);
 // router.get('/explore/cheap-flights-good-weather', getCheapFlightsGoodWeather);
 // router.get('/explore/monthly-route-avg', getMonthlyRouteAvg);
+
 
 export default router;

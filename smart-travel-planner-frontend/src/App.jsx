@@ -135,10 +135,39 @@ function SignInPage({ onSignIn }) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
+    // e.preventDefault();
+    // if (!fullName || !email) return;
+    // onSignIn({ fullName, email });
+
     e.preventDefault();
     if (!fullName || !email) return;
-    onSignIn({ fullName, email });
+
+    try {
+      const response = await fetch("http://localhost:3000/api/userLogin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fullName,
+          email: email,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Login failed", await response.json());
+        return;
+      }
+
+      const data = await response.json();
+
+      onSignIn({
+        fullName: data.name,
+        email: data.email,
+        userId: data.userId,
+      });
+    } catch (err) {
+      console.error("Error calling /api/userLogin:", err);
+    }
   }
 
   return (

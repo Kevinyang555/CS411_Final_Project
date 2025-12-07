@@ -554,4 +554,91 @@
       grid-template-columns: 1fr;
     }
   }
-  
+
+  /* ---------- Modal ---------- */
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal {
+    background: rgba(15, 23, 42, 0.98);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(30, 64, 175, 0.45);
+    padding: 24px;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .modal h3 {
+    margin: 0 0 8px;
+  }
+
+  .modal .field {
+    margin-top: 16px;
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  /* ---------- My Trips ---------- */
+
+  .trips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .trip-card {
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(55, 65, 81, 0.9);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color var(--transition-fast);
+  }
+
+  .trip-card:hover {
+    border-color: var(--accent-border);
+  }
+
+  .trip-card-selected {
+    border-color: var(--accent);
+  }
+
+  .trip-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .trip-card-header h4 {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .trip-card-footer {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .trip-card .btn {
+    margin-top: auto;
+    width: 100%;
+  }

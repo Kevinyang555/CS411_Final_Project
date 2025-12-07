@@ -1,25 +1,11 @@
-/**
- * Trip Controller
- *
- * Contains business logic for trip planning endpoints.
- * This is where we query the database and format responses.
- */
-
 import pool from '../config/database.js';
 
-/**
- * Helper function: Convert Celsius to Fahrenheit
- */
+// Convert Celsius to Fahrenheit
 function cToF(celsius) {
   return (celsius * 9) / 5 + 32;
 }
 
-/**
- * POST /api/trip-summary
- *
- * Main endpoint that combines weather, flights, and attractions
- * for a given trip query.
- */
+// Get weather, flights, and attractions for a trip query
 export async function getTripSummary(req, res) {
   try {
     const {
@@ -35,7 +21,6 @@ export async function getTripSummary(req, res) {
       maxFlightPrice
     } = req.body;
 
-    // Validate required fields
     if (!origin || !destination || !startDate || !endDate) {
       return res.status(400).json({
         error: 'Missing required fields',
@@ -43,10 +28,9 @@ export async function getTripSummary(req, res) {
       });
     }
 
-    console.log(`📍 Trip query: ${origin} → ${destination} (${startDate} to ${endDate})`);
+    console.log(`Trip query: ${origin} -> ${destination} (${startDate} to ${endDate})`);
 
-    // ==================== STEP 1: Get Location IDs ====================
-
+    // Get location IDs
     const [originLocations] = await pool.query(
       'SELECT location_id, name, country, lat, lon FROM Location WHERE name LIKE ? LIMIT 1',
       [`%${origin}%`]
@@ -71,8 +55,7 @@ export async function getTripSummary(req, res) {
     console.log(`   Origin: ${originLoc.name}, ${originLoc.country} (ID: ${originLoc.location_id})`);
     console.log(`   Destination: ${destLoc.name}, ${destLoc.country} (ID: ${destLoc.location_id})`);
 
-    // ==================== STEP 2: Get Weather Data ====================
-
+    // Get weather data
     const [weatherData] = await pool.query(
       `SELECT
         on_date,
@@ -87,10 +70,8 @@ export async function getTripSummary(req, res) {
       [destLoc.location_id, startDate, endDate]
     );
 
-    // Calculate weather summary
     const weatherSummary = calculateWeatherSummary(weatherData);
 
-    // Format daily weather (convert temps to Fahrenheit for frontend)
     const weatherDaily = weatherData.map(day => ({
       date: day.on_date.toISOString().split('T')[0],
       min: parseFloat(day.min_temp_c),
@@ -99,8 +80,7 @@ export async function getTripSummary(req, res) {
       conditions: day.conditions
     }));
 
-    // ==================== STEP 3: Get Flight Options ====================
-
+    // Get flight options
     let flightQuery = `
       SELECT
         f.flight_id,
@@ -122,7 +102,6 @@ export async function getTripSummary(req, res) {
 
     const queryParams = [originLoc.location_id, destLoc.location_id];
 
-    // Add price filter if specified
     if (maxFlightPrice) {
       flightQuery += ' AND f.price <= ?';
       queryParams.push(maxFlightPrice);
@@ -144,8 +123,7 @@ export async function getTripSummary(req, res) {
       destinationCity: f.destination_city
     }));
 
-    // ==================== STEP 4: Get Attractions ====================
-
+    // Get attractions
     const [attractions] = await pool.query(
       `SELECT
         a.attraction_id AS id,
@@ -163,21 +141,16 @@ export async function getTripSummary(req, res) {
       [destLoc.location_id]
     );
 
-    // Format attractions with busyness index
     const attractionsWithCrowds = attractions.map(a => ({
       ...a,
       rating: a.rating ? parseFloat(a.rating) : null,
       busynessIndex: a.avg_busyness ? Math.round(parseFloat(a.avg_busyness)) : null
     }));
 
-    // ==================== STEP 5: Best Time to Visit ====================
-
     const bestTimeToVisit = {
       label: "Based on weather data",
       explanation: weatherSummary.conditionsSummary
     };
-
-    // ==================== STEP 6: Build Response ====================
 
     const response = {
       location: {
@@ -191,7 +164,7 @@ export async function getTripSummary(req, res) {
       bestTimeToVisit
     };
 
-    console.log(`✅ Successfully retrieved trip data for ${destination}`);
+    console.log(`Successfully retrieved trip data for ${destination}`);
     console.log(`   Weather: ${weatherDaily.length} days`);
     console.log(`   Flights: ${flightOptions.length} options`);
     console.log(`   Attractions: ${attractionsWithCrowds.length} places`);
@@ -199,7 +172,7 @@ export async function getTripSummary(req, res) {
     res.json(response);
 
   } catch (error) {
-    console.error('❌ Error in getTripSummary:', error);
+    console.error('Error in getTripSummary:', error);
     res.status(500).json({
       error: 'Failed to retrieve trip summary',
       message: error.message
@@ -207,9 +180,7 @@ export async function getTripSummary(req, res) {
   }
 }
 
-/**
- * Helper: Calculate weather summary from daily data
- */
+// Calculate weather summary from daily data
 function calculateWeatherSummary(weatherData) {
   if (weatherData.length === 0) {
     return {
@@ -224,7 +195,6 @@ function calculateWeatherSummary(weatherData) {
   const avgLow = weatherData.reduce((sum, d) => sum + parseFloat(d.min_temp_c), 0) / weatherData.length;
   const avgPrecip = weatherData.reduce((sum, d) => sum + parseFloat(d.precip_mm), 0) / weatherData.length;
 
-  // Generate conditions summary
   const rainyDays = weatherData.filter(d => d.conditions && d.conditions.toLowerCase().includes('rain')).length;
   const clearDays = weatherData.filter(d => d.conditions && d.conditions.toLowerCase().includes('clear')).length;
 

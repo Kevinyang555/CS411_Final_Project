@@ -109,6 +109,26 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState("planner");
 
+  // Lift TripPlanner state to App level so it persists across tab switches
+  const [plannerState, setPlannerState] = useState({
+    form: {
+      origin: "",
+      destination: "",
+      startDate: "",
+      endDate: "",
+      budget: "",
+      currency: "USD",
+      tempMin: 60,
+      tempMax: 90,
+      crowdPreference: "less",
+      maxFlightPrice: "",
+    },
+    summary: null,
+    itinerary: [],
+    currentTripId: null,
+    tripName: "",
+  });
+
   if (!user) {
     return <SignInPage onSignIn={setUser} />;
   }
@@ -119,8 +139,14 @@ export default function App() {
       <main className="main">
         <Header user={user} />
         <div className="main-content">
-          {activeTab === "planner" && <TripPlanner />}
-          {activeTab === "trips" && <TripsPlaceholder />}
+          {activeTab === "planner" && (
+            <TripPlanner
+              user={user}
+              plannerState={plannerState}
+              setPlannerState={setPlannerState}
+            />
+          )}
+          {activeTab === "trips" && <MyTrips user={user} />}
           {activeTab === "explore" && <Explore />}
           {activeTab === "about" && <About />}
         </div>
@@ -282,26 +308,42 @@ function Header({ user }) {
 
 // ---------------------------- Trip Planner ----------------------------
 
-function TripPlanner() {
-  const [form, setForm] = useState({
-    origin: "",
-    destination: "",
-    startDate: "",
-    endDate: "",
-    budget: "",
-    currency: "USD",
-    tempMin: 60,
-    tempMax: 90,
-    crowdPreference: "less",
-    maxFlightPrice: "",
-  });
+function TripPlanner({ user, plannerState, setPlannerState }) {
+  // Use lifted state from App
+  const { form, summary, itinerary, currentTripId, tripName } = plannerState;
+
+  // Local-only state (doesn't need to persist)
   const [loading, setLoading] = useState(false);
-  const [summary, setSummary] = useState(null);
   const [error, setError] = useState("");
-  const [itinerary, setItinerary] = useState([]);
+  const [showTripNameModal, setShowTripNameModal] = useState(false);
+  const [pendingAttraction, setPendingAttraction] = useState(null);
+  const [savingItinerary, setSavingItinerary] = useState(false);
+  const [localTripName, setLocalTripName] = useState("");
 
   function updateField(field, value) {
-    setForm((f) => ({ ...f, [field]: value }));
+    setPlannerState((prev) => ({
+      ...prev,
+      form: { ...prev.form, [field]: value },
+    }));
+  }
+
+  function setSummary(newSummary) {
+    setPlannerState((prev) => ({ ...prev, summary: newSummary }));
+  }
+
+  function setItinerary(updater) {
+    setPlannerState((prev) => ({
+      ...prev,
+      itinerary: typeof updater === "function" ? updater(prev.itinerary) : updater,
+    }));
+  }
+
+  function setCurrentTripId(id) {
+    setPlannerState((prev) => ({ ...prev, currentTripId: id }));
+  }
+
+  function setTripName(name) {
+    setPlannerState((prev) => ({ ...prev, tripName: name }));
   }
 
   async function handleSubmit(e) {
@@ -350,35 +392,181 @@ function TripPlanner() {
     }
   }
 
+  // Called when user clicks "Add to itinerary" on an attraction
   function handleAddToItinerary(attraction) {
-    setItinerary((prev) => {
-      if (prev.some((item) => item.attraction.id === attraction.id)) {
-        return prev;
+    // Check if attraction already in itinerary
+    if (itinerary.some((item) => item.attraction.id === attraction.id)) {
+      return;
+    }
+
+    // If no trip exists yet, show modal to get trip name
+    if (!currentTripId) {
+      setPendingAttraction(attraction);
+      setShowTripNameModal(true);
+      return;
+    }
+
+    // Trip exists, add item directly
+    addItemToExistingTrip(attraction);
+  }
+
+  // Create new trip with first itinerary item
+  async function handleCreateTripWithItem() {
+    if (!localTripName.trim() || !pendingAttraction) return;
+
+    setSavingItinerary(true);
+    try {
+      const response = await fetch("http://localhost:3000/api/trips", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user.userId,
+          tripName: localTripName.trim(),
+          origin: form.origin,
+          destination: form.destination,
+          startDate: form.startDate,
+          endDate: form.endDate,
+          attraction: pendingAttraction,
+          visitDate: form.startDate,
+          startTime: "10:00",
+          endTime: "12:00",
+          notes: "",
+        }),
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || "Failed to create trip");
       }
-      return [
+
+      const data = await response.json();
+      setCurrentTripId(data.tripId);
+      setTripName(localTripName.trim());
+
+      // Add to local itinerary state
+      setItinerary([
+        {
+          id: `${pendingAttraction.id}-1`,
+          itemId: data.itemId,
+          attraction: pendingAttraction,
+          visitDate: form.startDate,
+          startTime: "10:00",
+          endTime: "12:00",
+          notes: "",
+        },
+      ]);
+
+      setShowTripNameModal(false);
+      setPendingAttraction(null);
+      setLocalTripName("");
+      console.log(`Created trip "${localTripName}" with ID ${data.tripId}`);
+    } catch (err) {
+      console.error("Error creating trip:", err);
+      setError(err.message);
+    } finally {
+      setSavingItinerary(false);
+    }
+  }
+
+  // Add item to existing trip
+  async function addItemToExistingTrip(attraction) {
+    setSavingItinerary(true);
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/trips/${currentTripId}/itinerary`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            tripId: currentTripId,
+            attraction: attraction,
+            visitDate: form.startDate,
+            startTime: "10:00",
+            endTime: "12:00",
+            notes: "",
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || "Failed to add item");
+      }
+
+      const data = await response.json();
+
+      // Add to local itinerary state
+      setItinerary((prev) => [
         ...prev,
         {
           id: `${attraction.id}-${prev.length + 1}`,
+          itemId: data.itemId,
           attraction,
           visitDate: form.startDate,
           startTime: "10:00",
           endTime: "12:00",
           notes: "",
         },
-      ];
-    });
+      ]);
+
+      console.log(`Added item ${data.itemId} to trip ${currentTripId}`);
+    } catch (err) {
+      console.error("Error adding itinerary item:", err);
+      setError(err.message);
+    } finally {
+      setSavingItinerary(false);
+    }
   }
 
-  function updateItineraryItem(id, field, value) {
+  // Update itinerary item locally and sync to backend
+  async function updateItineraryItem(id, field, value) {
+    // Update local state immediately
     setItinerary((prev) =>
       prev.map((item) =>
         item.id === id ? { ...item, [field]: value } : item
       )
     );
+
+    // Find the item to get itemId for backend call
+    const item = itinerary.find((i) => i.id === id);
+    if (!item || !currentTripId || !item.itemId) return;
+
+    // Sync to backend (debounced would be better, but this works)
+    try {
+      await fetch(
+        `http://localhost:3000/api/trips/${currentTripId}/itinerary/${item.itemId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ [field]: value }),
+        }
+      );
+    } catch (err) {
+      console.error("Error updating itinerary item:", err);
+    }
   }
 
-  function removeItineraryItem(id) {
+  // Remove itinerary item from local state and backend
+  async function removeItineraryItem(id) {
+    const item = itinerary.find((i) => i.id === id);
+
+    // Remove from local state immediately
     setItinerary((prev) => prev.filter((item) => item.id !== id));
+
+    // Delete from backend
+    if (!item || !currentTripId || !item.itemId) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/trips/${currentTripId}/itinerary/${item.itemId}`,
+        { method: "DELETE" }
+      );
+      if (!response.ok) {
+        console.error("Failed to delete itinerary item from backend");
+      }
+    } catch (err) {
+      console.error("Error removing itinerary item:", err);
+    }
   }
 
   return (
@@ -527,8 +715,52 @@ function TripPlanner() {
             itinerary={itinerary}
             onChange={updateItineraryItem}
             onRemove={removeItineraryItem}
+            tripName={tripName}
+            currentTripId={currentTripId}
           />
         </>
+      )}
+
+      {/* Trip Name Modal */}
+      {showTripNameModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>Name Your Trip</h3>
+            <p className="muted">
+              Give your trip a name to save it and start building your itinerary.
+            </p>
+            <label className="field">
+              <span>Trip name</span>
+              <input
+                type="text"
+                className="input"
+                value={localTripName}
+                onChange={(e) => setLocalTripName(e.target.value)}
+                placeholder={`Trip to ${form.destination || "..."}`}
+                autoFocus
+              />
+            </label>
+            <div className="modal-actions">
+              <button
+                className="btn btn-ghost"
+                onClick={() => {
+                  setShowTripNameModal(false);
+                  setPendingAttraction(null);
+                  setLocalTripName("");
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={handleCreateTripWithItem}
+                disabled={!localTripName.trim() || savingItinerary}
+              >
+                {savingItinerary ? "Creating..." : "Create Trip"}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
@@ -750,18 +982,25 @@ function AttractionsPanel({ summary, onAddToItinerary }) {
   );
 }
 
-function ItineraryPanel({ itinerary, onChange, onRemove }) {
+function ItineraryPanel({ itinerary, onChange, onRemove, tripName, currentTripId }) {
   return (
     <section className="section">
       <div className="section-header">
-        <h4>Trip itinerary</h4>
+        <h4>
+          Trip itinerary
+          {tripName && currentTripId && (
+            <span className="chip chip-soft" style={{ marginLeft: "10px" }}>
+              {tripName} (saved)
+            </span>
+          )}
+        </h4>
         <p className="muted">
           Arrange visit dates and times for your selected attractions.
         </p>
       </div>
       {itinerary.length === 0 ? (
         <p className="muted">
-          Use “Add to itinerary” in the attractions table to start building your
+          Use "Add to itinerary" in the attractions table to start building your
           day-by-day plan.
         </p>
       ) : (
@@ -839,27 +1078,185 @@ function ItineraryPanel({ itinerary, onChange, onRemove }) {
 
 // ----------------------------- My Trips tab -----------------------------
 
-function TripsPlaceholder() {
+function MyTrips({ user }) {
+  const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [selectedTrip, setSelectedTrip] = useState(null);
+  const [tripDetails, setTripDetails] = useState(null);
+  const [loadingDetails, setLoadingDetails] = useState(false);
+
+  // Load trips on mount
+  useEffect(() => {
+    loadTrips();
+  }, [user.userId]);
+
+  async function loadTrips() {
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/trips/user/${user.userId}`
+      );
+      if (!response.ok) throw new Error("Failed to load trips");
+      const data = await response.json();
+      setTrips(data.trips || []);
+    } catch (err) {
+      console.error("Error loading trips:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function loadTripDetails(tripId) {
+    setLoadingDetails(true);
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/trips/${tripId}`
+      );
+      if (!response.ok) throw new Error("Failed to load trip details");
+      const data = await response.json();
+      setTripDetails(data);
+      setSelectedTrip(tripId);
+    } catch (err) {
+      console.error("Error loading trip details:", err);
+      setError(err.message);
+    } finally {
+      setLoadingDetails(false);
+    }
+  }
+
+  async function handleDeleteTrip(tripId) {
+    if (!confirm("Are you sure you want to delete this trip?")) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/trips/${tripId}`,
+        { method: "DELETE" }
+      );
+      if (!response.ok) throw new Error("Failed to delete trip");
+
+      // Refresh trips list
+      setTrips((prev) => prev.filter((t) => t.tripId !== tripId));
+      if (selectedTrip === tripId) {
+        setSelectedTrip(null);
+        setTripDetails(null);
+      }
+    } catch (err) {
+      console.error("Error deleting trip:", err);
+      setError(err.message);
+    }
+  }
+
   return (
     <div className="page">
       <section className="section">
         <div className="section-header">
           <h3>My Trips</h3>
           <p className="muted">
-            This tab can connect to your Trip / Itinerary tables to list saved
-            trips.
+            View and manage your saved trips and itineraries.
           </p>
         </div>
-        <p className="muted">
-          For now, this is a placeholder. Once your backend exposes endpoints
-          like <code>/api/trips</code> and <code>/api/trips/:id</code>, you can:
-        </p>
-        <ul className="list">
-          <li>List past and upcoming trips.</li>
-          <li>Open a trip to reload its weather, flights, and itinerary.</li>
-          <li>Allow users to edit or delete trips.</li>
-        </ul>
+
+        {loading ? (
+          <p className="muted">Loading your trips...</p>
+        ) : error ? (
+          <p className="error">{error}</p>
+        ) : trips.length === 0 ? (
+          <p className="muted">
+            No trips yet. Go to "Plan a Trip" and add attractions to your
+            itinerary to create your first trip.
+          </p>
+        ) : (
+          <div className="trips-grid">
+            {trips.map((trip) => (
+              <div
+                key={trip.tripId}
+                className={`trip-card ${selectedTrip === trip.tripId ? "trip-card-selected" : ""}`}
+              >
+                <div className="trip-card-header">
+                  <h4>{trip.tripName}</h4>
+                  <button
+                    className="btn btn-ghost tiny"
+                    onClick={() => handleDeleteTrip(trip.tripId)}
+                  >
+                    Delete
+                  </button>
+                </div>
+                <p className="muted">
+                  {trip.origin && `${trip.origin} → `}
+                  {trip.destination || "Destination TBD"}
+                </p>
+                <p className="muted tiny">
+                  {trip.startDate && trip.endDate
+                    ? `${trip.startDate} to ${trip.endDate}`
+                    : "Dates not set"}
+                </p>
+                <div className="trip-card-footer">
+                  <span className="chip chip-soft">
+                    {trip.itineraryCount || 0} item(s)
+                  </span>
+                  {trip.categories && (
+                    <span className="chip chip-soft">{trip.categories}</span>
+                  )}
+                </div>
+                <button
+                  className="btn btn-outline tiny"
+                  onClick={() => loadTripDetails(trip.tripId)}
+                  disabled={loadingDetails}
+                >
+                  {loadingDetails && selectedTrip === trip.tripId
+                    ? "Loading..."
+                    : "View Details"}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
+
+      {/* Trip Details Section */}
+      {tripDetails && (
+        <section className="section">
+          <div className="section-header">
+            <h4>{tripDetails.trip.tripName} - Itinerary</h4>
+            <p className="muted">
+              {tripDetails.trip.destination}
+              {tripDetails.trip.startDate &&
+                ` | ${tripDetails.trip.startDate} to ${tripDetails.trip.endDate}`}
+            </p>
+          </div>
+          {tripDetails.itinerary.length === 0 ? (
+            <p className="muted">No itinerary items for this trip.</p>
+          ) : (
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Attraction</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tripDetails.itinerary.map((item) => (
+                  <tr key={item.itemId}>
+                    <td>{item.attraction.name}</td>
+                    <td>{item.attraction.category}</td>
+                    <td>{item.visitDate}</td>
+                    <td>
+                      {item.startTime} - {item.endTime}
+                    </td>
+                    <td>{item.notes || "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </section>
+      )}
     </div>
   );
 }

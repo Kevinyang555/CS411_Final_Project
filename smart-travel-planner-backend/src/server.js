@@ -1,48 +1,30 @@
-/**
- * Main Server Entry Point
- *
- * This file sets up the Express server and configures middleware.
- *
- * Middleware: Functions that process requests before they reach your routes.
- * - express.json(): Parses JSON request bodies
- * - cors(): Allows frontend (port 5173) to call backend (port 3000)
- */
-
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import apiRoutes from './routes/api.js';
 
-// Load environment variables
 dotenv.config();
 
-// Create Express application
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ==================== MIDDLEWARE ====================
-
-// Enable CORS - allows frontend to make requests from different origin
+// Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // Your Vite dev server
+  origin: 'http://localhost:5173',
   credentials: true
 }));
-
-// Parse JSON request bodies
 app.use(express.json());
 
-// Log all incoming requests (helpful for debugging)
+// Log incoming requests
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
   next();
 });
 
-// ==================== ROUTES ====================
-
-// Mount API routes
+// Routes
 app.use('/api', apiRoutes);
 
-// Health check endpoint - useful for testing if server is running
+// Health check
 app.get('/health', (req, res) => {
   res.json({
     status: 'OK',
@@ -51,15 +33,13 @@ app.get('/health', (req, res) => {
   });
 });
 
-// 404 handler - if no route matches
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({
     error: 'Route not found',
     path: req.path
   });
 });
-
-// ==================== ERROR HANDLING ====================
 
 // Global error handler
 app.use((err, req, res, next) => {
@@ -70,12 +50,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ==================== START SERVER ====================
-
+// Start server
 app.listen(PORT, () => {
-  console.log('\n🚀 Smart Travel Planner Backend Server');
-  console.log(`   Server running at: http://localhost:${PORT}`);
-  console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`   Health check: http://localhost:${PORT}/health`);
-  console.log('\n📡 Waiting for requests...\n');
+  console.log(`\nSmart Travel Planner Backend`);
+  console.log(`Server running at: http://localhost:${PORT}`);
+  console.log(`Health check: http://localhost:${PORT}/health\n`);
 });

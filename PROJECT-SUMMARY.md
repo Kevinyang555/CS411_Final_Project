@@ -30,6 +30,11 @@ A full-stack travel planning application that helps users search for destination
 - Search destinations by city name
 - Results displayed in organized cards
 
+### 5. Explore Destinations (pre-built analytics)
+- **Location:** `smart-travel-planner-frontend/src/App.jsx` (Explore tab)
+- Inputs: start date (7-day window) and month (for price trends)
+- Calls backend explore endpoints for sunny cities, colder cities, cheap flights to good-weather places, and monthly route price trends
+
 ---
 
 ## Backend Structure
@@ -52,11 +57,16 @@ A full-stack travel planning application that helps users search for destination
 | PUT | `/api/trips/:tripId/itinerary/:itemId` | Update itinerary item |
 | DELETE | `/api/trips/:tripId/itinerary/:itemId` | Remove itinerary item |
 | DELETE | `/api/trips/:tripId` | Delete entire trip |
+| GET | `/api/explore/sunny-cities` | Sunniest cities (7-day window) |
+| GET | `/api/explore/cold-cities` | Colder cities than country avg (7-day window) |
+| GET | `/api/explore/cheap-flights-good-weather` | Cheapest flights + good weather (price/temp/precip filters) |
+| GET | `/api/explore/monthly-route-avg` | Monthly route price trends |
 
 ### Controllers
 - `userController.js` - User authentication
 - `tripController.js` - Weather/flights/attractions queries
 - `tripItineraryController.js` - Trip and itinerary CRUD
+- `exploreController.js` - Explore analytics endpoints (sunny, cold, cheap flights, monthly price trends)
 
 ### Database Connection
 - **File:** `smart-travel-planner-backend/src/config/database.js`

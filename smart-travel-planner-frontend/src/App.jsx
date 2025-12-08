@@ -1270,6 +1270,8 @@ function Explore() {
   const [coldCities, setColdCities] = useState([]);
   const [cheapFlights, setCheapFlights] = useState([]);
   const [monthlyAvg, setMonthlyAvg] = useState([]);
+  const [startDate, setStartDate] = useState("2025-10-20");
+  const [month, setMonth] = useState("2025-10");
   const [loading, setLoading] = useState({
     sunny: false,
     cold: false,
@@ -1286,7 +1288,7 @@ function Explore() {
 
   async function loadSunnyCities() {
     await fetchExplore(
-      "/explore/sunny-cities?limit=10",
+      `/explore/sunny-cities?startDate=${startDate}&limit=10`,
       setSunnyCities,
       "sunny",
       [
@@ -1303,7 +1305,7 @@ function Explore() {
 
   async function loadColdCities() {
     await fetchExplore(
-      "/explore/cold-cities?minDelta=2&limit=10",
+      `/explore/cold-cities?startDate=${startDate}&minDelta=2&limit=10`,
       setColdCities,
       "cold",
       [
@@ -1319,7 +1321,7 @@ function Explore() {
 
   async function loadCheapFlights() {
     await fetchExplore(
-      "/explore/cheap-flights-good-weather?minTemp=15&maxTemp=28&maxPrecip=3&maxPrice=1000&limit=15",
+      `/explore/cheap-flights-good-weather?startDate=${startDate}&minTemp=15&maxTemp=28&maxPrecip=3&maxPrice=1000&limit=15`,
       setCheapFlights,
       "cheap",
       [
@@ -1339,7 +1341,7 @@ function Explore() {
 
   async function loadMonthlyAvg() {
     await fetchExplore(
-      "/explore/monthly-route-avg?limit=20",
+      `/explore/monthly-route-avg?month=${month}&limit=20`,
       setMonthlyAvg,
       "monthly",
       [
@@ -1362,6 +1364,26 @@ function Explore() {
             Use pre-built analytics: sunny cities, colder getaways, cheap flights
             to good-weather spots, and monthly price trends.
           </p>
+          <div className="grid grid-2" style={{ gap: "12px", marginTop: "12px" }}>
+            <label className="field">
+              <span>Start date (7-day window)</span>
+              <input
+                type="date"
+                className="input"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+            </label>
+            <label className="field">
+              <span>Month for price trends</span>
+              <input
+                type="month"
+                className="input"
+                value={month}
+                onChange={(e) => setMonth(e.target.value)}
+              />
+            </label>
+          </div>
         </div>
         <div className="explore-grid">
           <ExploreCard

@@ -162,7 +162,7 @@ Click **"Get trip snapshot"**
 - Weather API data (OpenWeatherMap)
 - Flight data (OpenFlights dataset)
 - Attractions data
-- All stored in normalized relational database"
+   - All stored in normalized relational database"
 
 ### 2. **Advanced SQL Queries**
 "Our backend uses complex JOINs across 8 tables:
@@ -181,6 +181,13 @@ Automatic conversion in both directions"
 "Users can filter flights by max price
 Results sorted by price (cheapest first)
 Weather filtered by date range"
+
+### 5. **Explore Destinations (pre-built analytics)**
+- **Sunniest cities this week:** GET `/api/explore/sunny-cities?startDate=2025-10-20&limit=10`
+- **Colder cities than country average:** GET `/api/explore/cold-cities?startDate=2025-10-20&minDelta=2&limit=10`
+- **Cheapest flights to good-weather places:** GET `/api/explore/cheap-flights-good-weather?minTemp=15&maxTemp=28&maxPrecip=3&maxPrice=1000&limit=15` (date-agnostic)
+- **Monthly route price trends:** GET `/api/explore/monthly-route-avg?month=2025-10&limit=20`
+- Frontend Explore tab has inputs for start date (7-day window) and month; click each card to load results.
 
 ---
 
